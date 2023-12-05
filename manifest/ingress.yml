@@ -14,7 +14,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: argocd-server
+            name: my-service
             port:
               number: 80
       - path: /labs
@@ -25,11 +25,4 @@ spec:
             port:
               number: 80
 
-      - path: /argocd
-        pathType: Prefix
-        backend:
-          service:
-            name: my-service 
-            port:
-              number: 80
 
