@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: apachecontainer
-        image: baskarvj/baskeytech
+        image: httpd
         ports:
         - containerPort: 80
 
