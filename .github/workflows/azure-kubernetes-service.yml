@@ -9,7 +9,7 @@ env:
   RESOURCE_GROUP: "baskey_RG"
   CLUSTER_NAME: "qwerty_cluster"
   DEPLOYMENT_MANIFEST_PATH: "manifest/deploy2.yml"
-  REPOSITORY_NAME: httpdsample
+  IMAGE_NAME: httpdsample
 
 jobs:
   build:
@@ -32,15 +32,15 @@ jobs:
 
           echo Build started on `date`
           echo Building the Docker image...
-          docker build -t ${{ env.REPOSITORY_NAME }}:latest .
-          docker tag ${{ env.REPOSITORY_NAME }}:latest baskarvj/${{ env.REPOSITORY_NAME }}
-          #docker tag ${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:${{ github.sha }}
+          docker build -t ${{ env.IMAGE_NAME }}:latest .
+          docker tag ${{ env.IMAGE_NAME }}:latest baskarvj/${{ env.IMAGE_NAME }}
+          #docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}:${{ github.sha }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
 
-          docker push baskarvj/${{ env.REPOSITORY_NAME }}
-          #docker push /baskarvj${{ env.REPOSITORY_NAME }}:${{ github.sha }}
-          echo "image=${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          docker push baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+          echo "image=baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
 
 
   deploy:
@@ -75,14 +75,22 @@ jobs:
           admin: 'false'
           use-kubelogin: 'true'
 
-      # Deploys application based on given manifest file
-      - name: Deploys application
-        uses: Azure/k8s-deploy@v4
-        with:
-          action: deploy
-          manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-          images: |
-            baskarvj/${{ env.REPOSITORY_NAME }}:latest
-      - name: test
-        run: |- 
-           cat /tmp/deploy2.yml
+      # # Deploys application based on given manifest file
+      # - name: Deploys application
+      #   uses: Azure/k8s-deploy@v4
+      #   with:
+      #     action: deploy
+      #     manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+      #     images: |
+      #       baskarvj/${{ env.IMAGE_NAME }}:latest
+
+
+
+    # Deploy the Docker image to the AKS cluster
+    - name: Deploy
+      run: |-
+        sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/manifests/deploy2.yaml
+        sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifests/deploy2.yaml
+        cat ${{ github.workspace }}/.github/manifests/deploy2.yaml
+        kubectl apply -f ${{ github.workspace }}/.github/manifests/
+
