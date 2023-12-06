@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodecontainer
-        image: IMAGE
+        image: IMAGE:$GITHUB_SHA
         ports:
         - containerPort: 80
 
