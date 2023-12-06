@@ -82,4 +82,4 @@ jobs:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            ${{ env.REPOSITORY_NAME }}:latest
+            baskarvj/${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
