@@ -88,7 +88,7 @@ jobs:
       # Deploy the Docker image to the AKS cluster
       - name: Deploy
         run: |-
-          sed -i -e  's/httpdsample/'"IMAGE"'/' ${{ github.workspace }}/manifest/deploy2.yaml
+          sed -i -e  's/httpdsample/'"IMAGE"'/' /tmp/deploy2.yaml
           sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/manifest/deploy2.yaml
           sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/manifest/deploy2.yaml
           cat ${{ github.workspace }}/.github/manifests/deploy2.yaml
