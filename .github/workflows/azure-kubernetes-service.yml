@@ -34,8 +34,8 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/${{ env.IMAGE_NAME }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
-
-          docker push baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          echo Pushing image to docker hub.....
+          docker push baskarvj/${{ env.IMAGE_NAME }}
 
           echo "image=baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
 
