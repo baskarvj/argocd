@@ -25,17 +25,17 @@ jobs:
       - name: Build, tag, and push image to docker hub
         id: build-image
         run: |
-          echo ....>>>>>>>>>logging in to docker hub<<<<<<<<<<<<<<.....
+          echo "....>>>>>>>>>logging in to docker hub<<<<<<<<<<<<<<....."
           docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
 
           echo Build started on `date`
-          echo ....>>>>>>>>>Building the Docker image<<<<<<<<<<<<<<........
+          echo "....>>>>>>>>>Building the Docker image<<<<<<<<<<<<<<........"
           docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
           docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/${{ env.IMAGE_NAME }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
           
-          echo ....>>>>>>>>>Pushing image to docker hub<<<<<<<<<<<<<<.....
+          echo "....>>>>>>>>>Pushing image to docker hub<<<<<<<<<<<<<<....."
           
           docker push baskarvj/${{ env.IMAGE_NAME }}
 
