@@ -82,4 +82,4 @@ jobs:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            baskarvj/${{ env.REPOSITORY_NAME }}:${{ github.sha }}
+            baskarvj/${{ env.REPOSITORY_NAME }}:latest
