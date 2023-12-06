@@ -85,4 +85,4 @@ jobs:
             baskarvj/${{ env.REPOSITORY_NAME }}:latest
       - name: test
         run: |- 
-           cat manifest/deploy2.yml 
+           cat /tmp/deploy2.yml
