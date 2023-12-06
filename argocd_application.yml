@@ -20,6 +20,6 @@ spec:
 
 
     automated:
-      selfHeal: true
+      selfHeal: false
       prune: true
 
