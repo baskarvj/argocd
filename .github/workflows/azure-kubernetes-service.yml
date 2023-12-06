@@ -27,20 +27,20 @@ jobs:
         run: |
           echo logging in to docker hub...
           docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
-          COMMIT_HASH=$(git rev-parse HEAD)
-          IMAGE_TAG=${COMMIT_HASH:=latest}      
+          #COMMIT_HASH=$(git rev-parse HEAD)
+          #IMAGE_TAG=${COMMIT_HASH:=latest}      
 
           echo Build started on `date`
           echo Building the Docker image...
           docker build -t ${{ env.REPOSITORY_NAME }}:latest .
           docker tag ${{ env.REPOSITORY_NAME }}:latest baskarvj/${{ env.REPOSITORY_NAME }}
-          #docker tag ${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
+          #docker tag ${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:${{ github.sha }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
 
           docker push baskarvj/${{ env.REPOSITORY_NAME }}
-          #docker push /baskarvj${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
-          echo "image=${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          #docker push /baskarvj${{ env.REPOSITORY_NAME }}:${{ github.sha }}
+          echo "image=${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
 
 
   deploy:
@@ -82,4 +82,4 @@ jobs:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            baskarvj/${{ env.REPOSITORY_NAME }}:latest
+            baskarvj/${{ env.REPOSITORY_NAME }}:${{ github.sha }}
