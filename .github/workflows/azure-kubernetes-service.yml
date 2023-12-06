@@ -50,21 +50,10 @@ jobs:
       # Checks out the repository this file is in
       - uses: actions/checkout@v3
 
-      # Logs in with your Azure credentials
-      - name: Azure login
-        uses: azure/login@v1.4.6
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
 
       # Builds and pushes an image up to your docker hub
       - name: Build, tag, and push image to docker hub
         id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
         run: |
           echo logging in to docker hub...
           docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
@@ -81,7 +70,6 @@ jobs:
           docker push baskarvj/$REPOSITORY_NAME:latest
           docker push /baskarvj$REPOSITORY_NAME:$IMAGE_TAG
           echo "image=$REPOSITORY_NAME:latest $REPOSITORY_NAME:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
 
 
   deploy:
