@@ -12,7 +12,7 @@ env:
   REPOSITORY_NAME: httpdsample
 
 jobs:
-  buildImage:
+  build:
     permissions:
       contents: read
       id-token: write
@@ -82,4 +82,4 @@ jobs:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            baskarvj/${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
+            baskarvj/${{ env.REPOSITORY_NAME }}:latest
