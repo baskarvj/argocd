@@ -63,7 +63,8 @@ jobs:
           echo Build started on `date`
           echo Building the Docker image...
           docker build -t ${{ env.REPOSITORY_NAME }}:latest .
-          docker tag ${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
+          docker tag ${{ env.REPOSITORY_NAME }}:latest baskarvj/${{ env.REPOSITORY_NAME }}
+          #docker tag ${{ env.REPOSITORY_NAME }}:latest ${{ env.REPOSITORY_NAME }}:$IMAGE_TAG
           #docker tag my-image username/my-repo
           #docker push username/my-repo
 
