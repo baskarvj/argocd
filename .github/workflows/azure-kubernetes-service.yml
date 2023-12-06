@@ -25,16 +25,18 @@ jobs:
       - name: Build, tag, and push image to docker hub
         id: build-image
         run: |
-          echo logging in to docker hub...
+          echo ....>>>>>>>>>logging in to docker hub<<<<<<<<<<<<<<.....
           docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
 
           echo Build started on `date`
-          echo Building the Docker image...
+          echo ....>>>>>>>>>Building the Docker image<<<<<<<<<<<<<<........
           docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
           docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/${{ env.IMAGE_NAME }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
-          echo Pushing image to docker hub.....
+          
+          echo ....>>>>>>>>>Pushing image to docker hub<<<<<<<<<<<<<<.....
+          
           docker push baskarvj/${{ env.IMAGE_NAME }}
 
           echo "image=baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
@@ -86,8 +88,8 @@ jobs:
       # Deploy the Docker image to the AKS cluster
       - name: Deploy
         run: |-
-          sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/manifests/deploy2.yaml
-          sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifests/deploy2.yaml
+          sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/manifest/deploy2.yaml
+          sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifest/deploy2.yaml
           cat ${{ github.workspace }}/.github/manifests/deploy2.yaml
-          kubectl apply -f ${{ github.workspace }}/.github/manifests/
+          kubectl apply -f ${{ github.workspace }}/.github/manifest/deploy2.yml
 
