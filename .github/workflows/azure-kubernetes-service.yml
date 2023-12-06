@@ -97,8 +97,8 @@ jobs:
 
       # Logs in with your Azure credentials
       - name: Azure login
-        uses: azure/login@v1.4.6
         run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
           az login -u ${{ secrets.az_username }}  -p ${{ secrets.az_password  }}
 
       # Use kubelogin to configure your kubeconfig for Azure auth
