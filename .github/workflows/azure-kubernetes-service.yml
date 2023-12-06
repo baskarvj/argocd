@@ -83,3 +83,6 @@ jobs:
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
             baskarvj/${{ env.REPOSITORY_NAME }}:latest
+      - name: test
+        run: |- 
+           cat manifest/deploy2.yml 
