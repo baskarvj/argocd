@@ -27,14 +27,11 @@ jobs:
         run: |
           echo logging in to docker hub...
           docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
-          #COMMIT_HASH=$(git rev-parse HEAD)
-          #IMAGE_TAG=${COMMIT_HASH:=latest}      
 
           echo Build started on `date`
           echo Building the Docker image...
-          docker build -t ${{ env.IMAGE_NAME }}:latest .
-          docker tag ${{ env.IMAGE_NAME }}:latest baskarvj/${{ env.IMAGE_NAME }}
-          #docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/${{ env.IMAGE_NAME }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
 
