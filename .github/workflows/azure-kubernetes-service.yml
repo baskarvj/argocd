@@ -84,13 +84,4 @@ jobs:
         run: |
             git clone https://github.com/baskarvj/kubernetes_with_argocd.git
             ls
-            sed -i -e  's/$(<image_commit.txt)/'"GITHUB_SHA"'/' manifest/deploy2.yml
-            sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' manifest/deploy2.yml
-            cat /manifest/deploy2.yml
-            > image_commit.txt
-            echo $GITHUB_SHA >> image_commit.txt
-            cat image_commit.txt
-            
-            git add .
-            git commit -m "image updated"
-            git push https://baskarvj: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@github.com/baskarvj/kubernetes_with_argocd.git main
+          
