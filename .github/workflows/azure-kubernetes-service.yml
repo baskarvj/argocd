@@ -95,4 +95,4 @@ jobs:
 
             git add .
             git commit -m "image updated"
-            git push https://baskarvj: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@github.com/baskarvj/kubernetes_with_argocd.git main
+            git push https://baskarvj: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@github.com/baskarvj/kubernetes_with_argocd.git main
