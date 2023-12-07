@@ -89,8 +89,8 @@ jobs:
       - name: Deploy
         run: |-
           # sed -i -e  's/httpdsample/'"IMAGE"'/' /tmp/deploy2.yaml
-          sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/manifest/deploy2.yml
-          sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifest/deploy2.yml
-          cat ${{ github.workspace }}/.github/manifest/deploy2.yml
-          kubectl apply -f ${{ github.workspace }}/.github/manifest/deploy2.yml
+          sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/workflows/manifest/deploy2.yml
+          sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/workflows/manifest/deploy2.yml
+          cat ${{ github.workspace }}/.github/workflows/manifest/deploy2.yml
+          kubectl apply -f ${{ github.workspace }}/.github/workflows/manifest/deploy2.yml
 
