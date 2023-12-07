@@ -85,19 +85,12 @@ jobs:
 
 
 
-      # # Deploy the Docker image to the AKS cluster
-      # - name: Deploy
-      #   run: |-
-      #     sed -i -e  's/httpdsample/'"IMAGE"'/' /tmp/deploy2.yaml
-      #     sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/manifest/deploy2.yaml
-      #     sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/manifest/deploy2.yaml
-      #     cat ${{ github.workspace }}/.github/manifests/deploy2.yaml
-      #     kubectl apply -f ${{ github.workspace }}/.github/manifest/deploy2.yml
+      # Deploy the Docker image to the AKS cluster
+      - name: Deploy
+        run: |-
+          # sed -i -e  's/httpdsample/'"IMAGE"'/' /tmp/deploy2.yaml
+          sed -i -e  's/IMAGE/'"$IMAGE_NAME"'/' ${{ github.workspace }}/.github/manifest/deploy2.yml
+          sed -i -e  's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifest/deploy2.yml
+          cat ${{ github.workspace }}/.github/manifest/deploy2.yml
+          kubectl apply -f ${{ github.workspace }}/.github/manifest/deploy2.yml
 
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: IMAGE_NAME
-          replace: image
-          regex: false
-          include: manifest/deploy2.yml
