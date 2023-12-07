@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/baskarvj/argocd.git
     targetRevision: main
-    path: manifest
+    path: .github/workflows/manifest
   destination: 
     server: https://kubernetes.default.svc
     namespace: default
