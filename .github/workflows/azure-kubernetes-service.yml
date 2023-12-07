@@ -30,16 +30,17 @@ jobs:
 
           echo Build started on `date`
           echo "....>>>>>>>>>Building the Docker image<<<<<<<<<<<<<<........"
-          docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
-          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/${{ env.IMAGE_NAME }}
+          #docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          docker build -t baskarvj/httpdsample:${{ github.sha }} .
+          #docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} baskarvj/httpdsample:${{ github.sha }}
           #docker tag my-image username/my-repo
           #docker push username/my-repo
           
           echo "....>>>>>>>>>Pushing image to docker hub<<<<<<<<<<<<<<....."
           
-          docker push baskarvj/${{ env.IMAGE_NAME }}
+          docker push baskarvj/httpdsample:${{ github.sha }} 
 
-          echo "image=baskarvj/${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "image=baskarvj/httpdsample:${{ github.sha }}" >> $GITHUB_OUTPUT
 
 
   deploy:
