@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodecontainer
-        image: baskarvj/httpdsample:1af56cd55a6fe9097ef2835811f0c0ab8f10f61e
+        image: baskarvj/httpdsample:edb29a2153e709a48821f1f557f683612b97dae0
         ports:
         - containerPort: 80
 
