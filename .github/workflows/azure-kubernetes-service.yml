@@ -97,7 +97,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: IMAGE
-          replace: $IMAGE_NAME
+          find: IMAGE_NAME
+          replace: image
           regex: false
           include: manifest/deploy2.yml
