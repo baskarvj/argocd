@@ -85,12 +85,8 @@ jobs:
             git clone https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd.git
             cd kubernetes_with_argocd
             ls -la
-            #sed -i -e  's/$(<image_commit.txt)/'"$GITHUB_SHA"'/' .github/workflows/manifest/deploy2.yml
-            sed 's/.*image: baskarvj.*/        image: baskarvj/httpdsample:"$GITHUB_SHA"/' .github/workflows/manifest/deploy2.yml
+            sed -i '/image: baskarvj.*/c\        image: baskarvj/httpdsample:${{ github.sha }}' .github/workflows/manifest/deploy2.yml
             cat .github/workflows/manifest/deploy2.yml
-            # > image_commit.txt
-            # echo $GITHUB_SHA >> image_commit.txt
-            # cat image_commit.txt
             
             git config user.email "baskeyvj03@gmail.com"
             git config user.name "baskarvj"
@@ -98,4 +94,3 @@ jobs:
             git add .
             git commit -m "image updated"
             git push https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd.git
-            #echo "https://baskarvj:${{ secrets.GIT_PASS }}@github.com/baskarvj/kubernetes_with_argocd.git"
