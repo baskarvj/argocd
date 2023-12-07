@@ -95,4 +95,4 @@ jobs:
 
             git add .
             git commit -m "image updated"
-            git push https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd.git main
+            git push https://baskarvj:${{ secrets.GIT_PASS }}@github.com/baskarvj/kubernetes_with_argocd.git main
