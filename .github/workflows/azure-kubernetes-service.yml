@@ -95,5 +95,6 @@ jobs:
 
             git add .
             git commit -m "image updated"
+            git rm --cached kubernetes_with_argocd
             git push 
             #echo "https://baskarvj:${{ secrets.GIT_PASS }}@github.com/baskarvj/kubernetes_with_argocd.git"
