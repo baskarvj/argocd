@@ -82,7 +82,7 @@ jobs:
 
       - name: Push Changes to argocd
         run: |
-            git clone https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd.git
+            git clone https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd_deploy.git
             cd kubernetes_with_argocd
             ls -la
             sed -i '/image: baskarvj.*/c\        image: baskarvj/httpdsample:${{ github.sha }}' manifest/deploy2.yml
@@ -93,4 +93,4 @@ jobs:
 
             git add .
             git commit -m "image updated"
-            git push https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd.git
+            git push https://baskarvj:${{ secrets.git_pass }}@github.com/baskarvj/kubernetes_with_argocd_deploy.git
